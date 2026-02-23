@@ -8,28 +8,29 @@ pipeline {
 
     stages {
 
-        stage('Checkout Code') {
-            steps {
-                git 'https://github.com/Pranali95/RiskRegister-Automation.git'
-            }
-        }
-
         stage('Build') {
             steps {
-                sh 'mvn clean compile'
+                bat 'mvn clean compile'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
         stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: 'target/**', fingerprint: true
+                junit 'target/surefire-reports/*.xml'
+                archiveArtifacts artifacts: 'target/ExtentReport.html', fingerprint: true
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline Execution Completed'
         }
     }
 }
