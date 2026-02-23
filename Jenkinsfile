@@ -33,4 +33,8 @@ pipeline {
             echo 'Pipeline Execution Completed'
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ba8d2aa (Fixed testng.xml name)
